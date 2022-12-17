@@ -10,7 +10,7 @@ export default function Toolbar({filters, selected, onSelectFilter}) {
       {filters.map(categoryName => 
         <li onClick={handleClick}
           key = {categoryName} 
-          className = {categoryName === selected ? 'selected' : ''}>
+          className = {categoryName === selected ? 'selected' : null}>
           {categoryName}
         </li>
       )}
