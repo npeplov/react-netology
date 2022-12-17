@@ -1,0 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Muli:400,300italic,300,400italic);
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  margin: 0 auto;
+  width: 640px;
+}
+

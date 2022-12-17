@@ -1,0 +1,23 @@
+.toolbar li {
+  padding: 5px 15px;
+  border: 1px solid #111;
+  margin: 0 5px 0 0;
+  list-style: none;
+  cursor: pointer;
+}
+
+.toolbar li:hover {
+  background: #eee;
+  color: #000;
+}
+
+.selected {
+  background: #111;
+  color: #fff;
+}
+
+li.selected:hover {
+  background: #111;
+  color: #fff;
+  cursor: default;
+}
