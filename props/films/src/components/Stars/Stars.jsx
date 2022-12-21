@@ -1,5 +1,6 @@
 import React from 'react'
 import Star from '../Star/Star'
+import './Stars.css'
 
 export default function Stars({ count }) {
 
@@ -14,5 +15,3 @@ export default function Stars({ count }) {
     </>
   )
 }
-
-
