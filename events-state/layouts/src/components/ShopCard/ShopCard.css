@@ -1,0 +1,21 @@
+.ShopCard {
+  margin: 8px 10px;
+  position: relative;
+}
+.ShopCard span {
+  position: absolute;
+}
+.name {
+  left: 35%;
+}
+.price {
+  bottom: 30px;
+  left: 50%;
+}
+.color {
+  top: 30px;
+  left: 50%;
+}
+img {
+  max-width: 300px;
+}

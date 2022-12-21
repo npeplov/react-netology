@@ -1,0 +1,11 @@
+.ShopItem {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f5f5f5;
+  margin-bottom: 1px;
+}
+
+.ShopItem img {
+  max-width: 130px;
+}

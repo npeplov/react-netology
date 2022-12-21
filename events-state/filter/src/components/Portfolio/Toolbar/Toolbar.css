@@ -14,10 +14,5 @@
 .selected {
   background: #111;
   color: #fff;
-}
-
-li.selected:hover {
-  background: #111;
-  color: #fff;
-  cursor: default;
+  pointer-events: none;
 }

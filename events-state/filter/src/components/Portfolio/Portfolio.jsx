@@ -58,13 +58,17 @@ export default function Portfolio() {
   }];
   const filters = ["All", "Websites", "Flayers", "Business Cards"];
   const [selected, setSelected] = useState('All');
+
+  const onSelectFilter = (toolbarItem) => {
+    setSelected(prev => prev = toolbarItem);
+  }
   
   return (
     <>
       <Toolbar
         filters={filters}
         selected={selected}
-        onSelectFilter={setSelected}
+        onSelectFilter={onSelectFilter}
       />
       <ProjectList projects={selected === "All" ? projects : projects.filter(project => project.category === selected)}/>
     </>
