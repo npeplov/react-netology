@@ -1,18 +1,17 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Menu = () => {
-  const activeClassName = "menu__item menu__item-active";
-  const defaultClassName = "menu__item";
+const checkActive = ({isActive}) => isActive ? "menu__item menu__item-active" : "menu__item"
 
+const Menu = () => {
   return(
   <header>
     <nav className="menu">
-      <NavLink className={({isActive}) => isActive ? activeClassName : defaultClassName } to="/">Главная</NavLink>
-      <NavLink className={({isActive}) => isActive ? activeClassName : defaultClassName } to="/drift">Дрифт-такси</NavLink>
-      <NavLink className={({isActive}) => isActive ? activeClassName : defaultClassName } to="/timeattack">Time Attack</NavLink>
-      <NavLink className={({isActive}) => isActive ? activeClassName : defaultClassName } to="/forza">Forza Karting</NavLink>
+      <NavLink className={checkActive} to="/">Главная</NavLink>
+      <NavLink className={checkActive} to="/drift">Дрифт-такси</NavLink>
+      <NavLink className={checkActive} to="/timeattack">Time Attack</NavLink>
+      <NavLink className={checkActive} to="/forza">Forza Karting</NavLink>
     </nav>
   </header>)
-};
+}
+
 export { Menu };
