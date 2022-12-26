@@ -15,12 +15,13 @@ const editSlice = createSlice({
     addWork: (state, action) => {
       state.list.push(action.payload)
     },
-    editWork: (state, action) => {
-      console.log(action.payload);
+    editWorkReducer: (state, action) => {
+      const {id, title, price} = action.payload;
+      state.edited = {id, title, price}
     }
   }
 })
 
-export const { addWork, editWork } = editSlice.actions
+export const { addWork, editWorkReducer } = editSlice.actions
 
 export default editSlice.reducer
