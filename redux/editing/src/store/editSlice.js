@@ -1,27 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const editSlice = createSlice({
-  name: 'works',
+  name: "works",
   initialState: {
-    list: 
-    [
-      {id: 'MHVYIzdV_rF5izkpyFn5T', title: 'Замена стекла', price: '22000'},
-      {id: 'MHVYIzdV_rF5izkpyFn5', title: 'Замена дисплея', price: '20000'},
-      {id: 'MHVYIzdV_rF5izk', title: 'Замена аккумулятора', price: '15000'},
-      {id: 'MHVYIzdV_rF5izkpyF', title: 'Замена микрофона', price: '10000'},
-    ]
+    list: [
+      { id: "MHVYIzdV_rF5izkpyFn5T", title: "Замена стекла", price: "22000" },
+      { id: "MHVYIzdV_rF5izkpyFn5", title: "Замена дисплея", price: "20000" },
+      { id: "MHVYIzdV_rF5izk", title: "Замена аккумулятора", price: "15000" },
+      { id: "MHVYIzdV_rF5izkpyF", title: "Замена микрофона", price: "10000" },
+    ],
+    edited: { id: "", title: "", price: "" },
   },
   reducers: {
     addWork: (state, action) => {
-      state.list.push(action.payload)
+      state.list.push(action.payload);
     },
     editWorkReducer: (state, action) => {
-      const {id, title, price} = action.payload;
-      state.edited = {id, title, price}
+      const { id, title, price } = action.payload;
+      state.edited = { id, title, price };
+    },
+    updateWork: (state, action) => {
+      const { id } = action.payload;
+      const immutable = state.list.filter(item => item.id !== id)
+      state.list = [...immutable, action.payload]
+      state.edited = { id: "", title: "", price: "" }
+    },
+    editInput: (state, action) => {
+      const name = Object.keys(action.payload)[0]
+      state.edited[name] = action.payload[name]
     }
-  }
-})
+  },
+});
 
-export const { addWork, editWorkReducer } = editSlice.actions
+export const { addWork, editWorkReducer, updateWork, editInput } = editSlice.actions;
 
-export default editSlice.reducer
+export default editSlice.reducer;

@@ -1,31 +1,31 @@
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputField } from "./InputField";
 import SubmitButton from "./UI/myButton/MyButton";
-import { addWork } from "../store/editSlice";
+import { addWork, editInput, updateWork } from "../store/editSlice";
 import { nanoid } from "@reduxjs/toolkit";
 
 export const AddForm = () => {
   const dispatch = useDispatch();
 
   let isEditMode = useSelector((state) => state.works.edited);
-  const [inputsValue, setInputsValue] = useState({ title: "", price: "" });
-
+  
   const handleChange = (e) => {
     const {name, value} = e.target;
-    setInputsValue({...inputsValue, [name]: value})
+     dispatch(editInput({[name]: value, prop: name}))
   }
 
   const handleSubmit = (e) => {
+    if (isEditMode) {
+      dispatch(
+        updateWork({
+          id: isEditMode.id,
+          title: isEditMode.title,
+          price: isEditMode.price,
+        })
+      );
+      isEditMode = undefined;
+    }
     e.preventDefault();
-    dispatch(
-      addWork({
-        id: nanoid(),
-        title: inputsValue.title,
-        price: inputsValue.price,
-      })
-    );
-    setInputsValue({ title: "", price: "" });
   };
 
   return (
@@ -33,13 +33,13 @@ export const AddForm = () => {
       <InputField
         placeholder="Название"
         name="title"
-        value={isEditMode ? isEditMode.title : inputsValue.title}
+        value={isEditMode.title}
         onChange={handleChange}
       />
       <InputField
         placeholder="Цена"
         name="price"
-        value={isEditMode ? isEditMode.price : inputsValue.price}
+        value={isEditMode.price}
         onChange={handleChange}
       />
       {/* isEditMode ? editButton : addButton */}
