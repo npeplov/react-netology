@@ -7,15 +7,15 @@ import { nanoid } from "@reduxjs/toolkit";
 export const AddForm = () => {
   const dispatch = useDispatch();
 
-  let isEditMode = useSelector((state) => state.works.edited);
-  
+  const isEditMode = useSelector((state) => state.works.edited);
+
   const handleChange = (e) => {
-    const {name, value} = e.target;
-     dispatch(editInput({[name]: value, prop: name}))
-  }
+    const { name, value } = e.target;
+    dispatch(editInput({ [name]: value }));
+  };
 
   const handleSubmit = (e) => {
-    if (isEditMode) {
+    if (isEditMode.id) {
       dispatch(
         updateWork({
           id: isEditMode.id,
@@ -23,7 +23,15 @@ export const AddForm = () => {
           price: isEditMode.price,
         })
       );
-      isEditMode = undefined;
+
+    } else {
+      dispatch(
+        addWork({
+          id: nanoid(),
+          title: isEditMode.title,
+          price: isEditMode.price,
+        })
+      );
     }
     e.preventDefault();
   };
@@ -42,9 +50,9 @@ export const AddForm = () => {
         value={isEditMode.price}
         onChange={handleChange}
       />
-      {/* isEditMode ? editButton : addButton */}
-      {/* текст и действие при нажатии */}
-      <SubmitButton onClick={handleSubmit}>Добавить</SubmitButton>
+      <SubmitButton onClick={handleSubmit}>
+        {isEditMode.id ? "Сохранить" : "Добавить"}
+      </SubmitButton>
     </form>
   );
 };

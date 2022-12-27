@@ -21,8 +21,8 @@ const editSlice = createSlice({
     },
     updateWork: (state, action) => {
       const { id } = action.payload;
-      const immutable = state.list.filter(item => item.id !== id)
-      state.list = [...immutable, action.payload]
+      const ind = state.list.findIndex((el)=> el.id === id)
+      state.list.splice(ind, 1, action.payload)
       state.edited = { id: "", title: "", price: "" }
     },
     editInput: (state, action) => {
