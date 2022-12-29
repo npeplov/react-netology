@@ -1,19 +1,13 @@
 import { useAppSelector } from "../app/hooks";
+import { WorkItem } from "./WorkItem";
 
-export const WorksList: React.FC = () => {
+export const WorksList = () => {
   const worksList = useAppSelector((state) => state.works.list);
   return (
     <div>
       <ul>
         {worksList.map((work) => (
-          <li key={work.id} className="row">
-            <div className="col s4">{work.title}</div>
-            <div className="col s2">{work.price} р.</div>
-            <div className="col s2">
-              <button>Edit</button>
-              <button>Del</button>
-            </div>
-          </li>
+          <WorkItem item={work} key={work.id} />
         ))}
       </ul>
     </div>

@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { useAppDispatch } from "../app/hooks";
-import { addActionCrtr } from "../features/works/worksSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { formSlice } from "../features/works/formSlice";
+import { updateActionCrtr } from "../features/works/worksSlice";
 
-export const AddForm: React.FC = () => {
-  const [fields, setFields] = useState({title: '', price: ''})
+export const UpdateForm: React.FC = () => {
+  const fields = useAppSelector((state) => state.form.update);
+  const { changeActionCrtr, clearActionCrtr } = formSlice.actions;
 
   const dispatch = useAppDispatch();
-
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFields({ ...fields, [name]: value })
-  }
+    dispatch(changeActionCrtr({ ...fields, [name]: value }));
+  };
   const submutHandler = (event: React.FormEvent<HTMLFormElement>) => {
-    const id = Date.now();
-    dispatch(addActionCrtr({ id: id, ...fields }));
-    setFields({title: '', price: ''})
+    dispatch(updateActionCrtr({ ...fields }))
+    dispatch(clearActionCrtr());
     event.preventDefault();
   };
+  // нужен другой value для 2 инпут и 1 кнопка
   return (
     <div className="row">
       <form onSubmit={submutHandler}>
@@ -43,7 +43,7 @@ export const AddForm: React.FC = () => {
           />
         </div>
         <div className="col s3">
-          <button type="submit">Add</button>
+          <button type="submit">Update</button>
         </div>
       </form>
     </div>

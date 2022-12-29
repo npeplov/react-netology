@@ -5,9 +5,24 @@ interface Fields {
   price: string;
 }
 
-const initialState:Fields = {
-  title: '',
-  price: '',
+interface UpdateWorkData {
+  title: string;
+  price: string;
+  id: number | undefined
+}
+
+type Form = { edit: Fields, update: UpdateWorkData }
+
+const initialState: Form = {
+  edit: {
+    title: '',
+    price: '',
+  }, 
+  update: {
+    title: '',
+    price: '', 
+    id: undefined
+  }
 }
 
 export const formSlice = createSlice({
@@ -15,11 +30,18 @@ export const formSlice = createSlice({
   initialState,
   reducers: {
     // 1. при вводе в инпут сохранять значения в стор
-    change (state, action:PayloadAction<Fields>) {
-      state.title =  action.payload.title
-      state.price =  action.payload.price
+    changeActionCrtr(state, action: PayloadAction<UpdateWorkData>) {
+      state.update.title = action.payload.title
+      state.update.price = action.payload.price
+      state.update.id = action.payload.id
     },
+    clearActionCrtr(state) {
+      state.update.title = ''
+      state.update.price = ''
+    }
   }
 })
+
+export const { changeActionCrtr } = formSlice.actions
 
 export default formSlice.reducer
