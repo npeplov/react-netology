@@ -1,12 +1,19 @@
 import { useAppSelector } from "./app/hooks";
+import { AddForm } from "./components/AddForm";
+import { ProductItem } from "./components/ProductItem";
 
 const App: React.FC = () => {
-  const test = useAppSelector(state=>state.market.products)
-    
+  const products = useAppSelector((state) => state.market.products);
+  console.log(products);
+  
   return (
     <div className="container">
-      Working
-      {test[0].title}
+      <ul>
+        {products.map((product) => (
+          <ProductItem item={product} key={product.id} />
+        ))}
+      </ul>
+      <AddForm/>
     </div>
   );
 };
